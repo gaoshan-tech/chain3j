@@ -102,6 +102,14 @@ public abstract class ManagedTransaction {
         return transactionManager.executeTransaction(gasPrice, gasLimit, to, data, value);
     }
 
+    protected TransactionReceipt send(
+            String to, String data, BigInteger value, BigInteger gasPrice, BigInteger gasLimit,
+            BigInteger shardingFlag, String via)
+            throws IOException, TransactionException {
+
+        return transactionManager.executeTransaction(gasPrice, gasLimit, to, data, value,shardingFlag, via);
+    }
+
     protected TransactionReceipt sendEIP1559(
             String to,
             String data,

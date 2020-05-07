@@ -42,6 +42,9 @@ public class Transaction {
     private BigInteger gasPremium;
     private BigInteger feeCap;
 
+    private BigInteger shardingflag;
+    private String via;
+
     public Transaction(
             String from,
             BigInteger nonce,
@@ -50,7 +53,18 @@ public class Transaction {
             String to,
             BigInteger value,
             String data) {
-        this(from, nonce, gasPrice, gasLimit, to, value, data, null, null);
+        this(from, nonce, gasPrice, gasLimit, to, value, data, null, null, BigInteger.ZERO, null);
+    }
+
+    public Transaction(
+            String from,
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
+            String data, BigInteger shardingflag, String via) {
+        new Transaction(from, nonce, gasPrice, gasLimit, to, value, data, shardingflag, via);
     }
 
     public Transaction(
@@ -63,11 +77,23 @@ public class Transaction {
             String data,
             BigInteger gasPremium,
             BigInteger feeCap) {
+        new Transaction(from, nonce, gasPrice, gasLimit,
+                to, value, data,
+                gasPremium,
+                feeCap, BigInteger.ZERO, null);
+    }
+
+    public Transaction(String from, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit,
+                       String to, BigInteger value, String data,
+                       BigInteger gasPremium,
+                       BigInteger feeCap, BigInteger shardingflag, String via) {
         this.from = from;
         this.to = to;
         this.gas = gasLimit;
         this.gasPrice = gasPrice;
         this.value = value;
+        this.shardingflag = shardingflag;
+        this.via = via;
 
         if (data != null) {
             this.data = Numeric.prependHexPrefix(data);
@@ -160,6 +186,22 @@ public class Transaction {
 
     public String getNonce() {
         return convert(nonce);
+    }
+
+    public BigInteger getShardingflag() {
+        return shardingflag;
+    }
+
+    public void setShardingflag(BigInteger shardingflag) {
+        this.shardingflag = shardingflag;
+    }
+
+    public String getVia() {
+        return via;
+    }
+
+    public void setVia(String via) {
+        this.via = via;
     }
 
     private static String convert(BigInteger value) {

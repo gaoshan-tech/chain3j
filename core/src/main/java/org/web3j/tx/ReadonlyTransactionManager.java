@@ -47,6 +47,14 @@ public class ReadonlyTransactionManager extends TransactionManager {
     }
 
     @Override
+    public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data,
+                                              BigInteger value, boolean constructor, BigInteger shardingFlag, String via)
+            throws IOException {
+        throw new UnsupportedOperationException(
+                "Only read operations are supported by this transaction manager");
+    }
+
+    @Override
     public EthSendTransaction sendTransactionEIP1559(
             BigInteger gasPremium,
             BigInteger feeCap,
@@ -56,6 +64,12 @@ public class ReadonlyTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
+        throw new UnsupportedOperationException(
+                "Only read operations are supported by this transaction manager");
+    }
+
+    @Override
+    public EthSendTransaction sendTransactionEIP1559(BigInteger gasPremium, BigInteger feeCap, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
         throw new UnsupportedOperationException(
                 "Only read operations are supported by this transaction manager");
     }

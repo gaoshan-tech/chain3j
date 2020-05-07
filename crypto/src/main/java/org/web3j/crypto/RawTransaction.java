@@ -31,6 +31,8 @@ public class RawTransaction {
     private String data;
     private BigInteger gasPremium;
     private BigInteger feeCap;
+    private BigInteger shardingflag;
+    private String via;
 
     protected RawTransaction(
             BigInteger nonce,
@@ -39,7 +41,7 @@ public class RawTransaction {
             String to,
             BigInteger value,
             String data) {
-        this(nonce, gasPrice, gasLimit, to, value, data, null, null);
+        this(nonce, gasPrice, gasLimit, to, value, data, null, null,BigInteger.ZERO,null);
     }
 
     protected RawTransaction(
@@ -51,6 +53,29 @@ public class RawTransaction {
             String data,
             BigInteger gasPremium,
             BigInteger feeCap) {
+       new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap,BigInteger.ZERO,null);
+    }
+
+    protected RawTransaction(
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
+            String data,
+            BigInteger shardingflag, String via) {
+        new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, null, null,shardingflag,via);
+    }
+
+    protected RawTransaction(
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
+            String data,
+            BigInteger gasPremium,
+            BigInteger feeCap, BigInteger shardingflag, String via) {
         this.nonce = nonce;
         this.gasPrice = gasPrice;
         this.gasLimit = gasLimit;
@@ -59,6 +84,8 @@ public class RawTransaction {
         this.data = data != null ? Numeric.cleanHexPrefix(data) : null;
         this.gasPremium = gasPremium;
         this.feeCap = feeCap;
+        this.shardingflag = shardingflag;
+        this.via = via;
     }
 
     public static RawTransaction createContractTransaction(
@@ -69,6 +96,16 @@ public class RawTransaction {
             String init) {
 
         return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init);
+    }
+
+    public static RawTransaction createContractTransaction(
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            BigInteger value,
+            String init, BigInteger shardingflag, String via) {
+
+        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init,shardingflag,via);
     }
 
     public static RawTransaction createEtherTransaction(
@@ -83,6 +120,16 @@ public class RawTransaction {
 
     public static RawTransaction createEtherTransaction(
             BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value, BigInteger shardingflag, String via) {
+
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",shardingflag,via);
+    }
+
+    public static RawTransaction createEtherTransaction(
+            BigInteger nonce,
             BigInteger gasLimit,
             String to,
             BigInteger value,
@@ -91,9 +138,24 @@ public class RawTransaction {
         return new RawTransaction(nonce, null, gasLimit, to, value, "", gasPremium, feeCap);
     }
 
+    public static RawTransaction createEtherTransaction(
+            BigInteger nonce,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
+            BigInteger gasPremium,
+            BigInteger feeCap,BigInteger shardingflag,String via) {
+        return new RawTransaction(nonce, null, gasLimit, to, value, "", gasPremium, feeCap, shardingflag, via);
+    }
+
     public static RawTransaction createTransaction(
             BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to, String data) {
         return createTransaction(nonce, gasPrice, gasLimit, to, BigInteger.ZERO, data);
+    }
+
+    public static RawTransaction createTransaction(
+            BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit, String to, String data,BigInteger shardingflag,String via) {
+        return createTransaction(nonce, gasPrice, gasLimit, to, BigInteger.ZERO, data, shardingflag, via);
     }
 
     public static RawTransaction createTransaction(
@@ -113,11 +175,35 @@ public class RawTransaction {
             BigInteger gasLimit,
             String to,
             BigInteger value,
+            String data,BigInteger shardingflag,String via) {
+
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data,shardingflag,via);
+    }
+
+    public static RawTransaction createTransaction(
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
             String data,
             BigInteger gasPremium,
             BigInteger feeCap) {
 
         return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap);
+    }
+
+    public static RawTransaction createTransaction(
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
+            String data,
+            BigInteger gasPremium,
+            BigInteger feeCap,BigInteger shardingflag,String via) {
+
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap, shardingflag, via);
     }
 
     public BigInteger getNonce() {
@@ -150,6 +236,14 @@ public class RawTransaction {
 
     public BigInteger getFeeCap() {
         return feeCap;
+    }
+
+    public BigInteger getShardingflag() {
+        return shardingflag;
+    }
+
+    public String getVia() {
+        return via;
     }
 
     public boolean isLegacyTransaction() {

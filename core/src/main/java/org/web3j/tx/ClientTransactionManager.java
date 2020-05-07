@@ -68,6 +68,22 @@ public class ClientTransactionManager extends TransactionManager {
     }
 
     @Override
+    public EthSendTransaction sendTransaction(
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            boolean constructor, BigInteger shardingFlag, String via)
+            throws IOException {
+
+        Transaction transaction =
+                new Transaction(getFromAddress(), null, gasPrice, gasLimit, to, value, data,null,null,BigInteger.ZERO, null);
+
+        return web3j.ethSendTransaction(transaction).send();
+    }
+
+    @Override
     public EthSendTransaction sendTransactionEIP1559(
             BigInteger gasPremium,
             BigInteger feeCap,
@@ -89,6 +105,32 @@ public class ClientTransactionManager extends TransactionManager {
                         data,
                         gasPremium,
                         feeCap);
+
+        return web3j.ethSendTransaction(transaction).send();
+    }
+
+    @Override
+    public EthSendTransaction sendTransactionEIP1559(
+            BigInteger gasPremium,
+            BigInteger feeCap,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            boolean constructor, BigInteger shardingFlag, String via)
+            throws IOException {
+
+        Transaction transaction =
+                new Transaction(
+                        getFromAddress(),
+                        null,
+                        null,
+                        gasLimit,
+                        to,
+                        value,
+                        data,
+                        gasPremium,
+                        feeCap,BigInteger.ZERO, null);
 
         return web3j.ethSendTransaction(transaction).send();
     }

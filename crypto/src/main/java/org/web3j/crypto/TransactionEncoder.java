@@ -105,6 +105,8 @@ public class TransactionEncoder {
         List<RlpType> result = new ArrayList<>();
 
         result.add(RlpString.create(rawTransaction.getNonce()));
+        //        transaction.systemContract = '0x0';//System contract flag, always = 0
+        result.add(RlpString.create(BigInteger.ZERO));
         result.add(RlpString.create(rawTransaction.getGasPrice()));
         result.add(RlpString.create(rawTransaction.getGasLimit()));
 
@@ -123,7 +125,15 @@ public class TransactionEncoder {
         // value field will already be hex encoded, so we need to convert into binary first
         byte[] data = Numeric.hexStringToByteArray(rawTransaction.getData());
         result.add(RlpString.create(data));
-
+        //transaction.shardingFlag = utils.numberToHex(tx.shardingFlag);
+        result.add(RlpString.create(rawTransaction.getShardingflag()));
+        // transaction.via.toLowerCase(),
+        String via = rawTransaction.getVia();
+        if (via != null && via.length() > 0) {
+            result.add(RlpString.create(Numeric.hexStringToByteArray(via)));
+        } else {
+            result.add(RlpString.create(""));
+        }
         // add gas premium and fee cap if this is an EIP-1559 transaction
         if (rawTransaction.isEIP1559Transaction()) {
             result.add(RlpString.create(rawTransaction.getGasPremium()));

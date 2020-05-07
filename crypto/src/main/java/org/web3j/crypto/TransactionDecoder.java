@@ -31,27 +31,29 @@ public class TransactionDecoder {
         final String to = ((RlpString) values.getValues().get(3)).asString();
         final BigInteger value = ((RlpString) values.getValues().get(4)).asPositiveBigInteger();
         final String data = ((RlpString) values.getValues().get(5)).asString();
-        if (values.getValues().size() == 6
-                || (values.getValues().size() == 8
-                        && ((RlpString) values.getValues().get(7)).getBytes().length == 10)
-                || (values.getValues().size() == 9
-                        && ((RlpString) values.getValues().get(8)).getBytes().length == 10)) {
+        BigInteger shardingFlag = ((RlpString) values.getValues().get(6)).asPositiveBigInteger();
+        String via = ((RlpString) values.getValues().get(7)).asString();
+        if (values.getValues().size() == 8
+                || (values.getValues().size() == 10
+                        && ((RlpString) values.getValues().get(9)).getBytes().length == 10)
+                || (values.getValues().size() == 11
+                        && ((RlpString) values.getValues().get(10)).getBytes().length == 10)) {
             // the 8th or 9nth element is the hex
             // representation of "restricted" for private transactions
-            return RawTransaction.createTransaction(nonce, gasPrice, gasLimit, to, value, data);
+            return RawTransaction.createTransaction(nonce, gasPrice, gasLimit, to, value, data,shardingFlag,via);
         } else {
-            final byte[] v = ((RlpString) values.getValues().get(6)).getBytes();
+            final byte[] v = ((RlpString) values.getValues().get(8)).getBytes();
             final byte[] r =
                     Numeric.toBytesPadded(
-                            Numeric.toBigInt(((RlpString) values.getValues().get(7)).getBytes()),
+                            Numeric.toBigInt(((RlpString) values.getValues().get(9)).getBytes()),
                             32);
             final byte[] s =
                     Numeric.toBytesPadded(
-                            Numeric.toBigInt(((RlpString) values.getValues().get(8)).getBytes()),
+                            Numeric.toBigInt(((RlpString) values.getValues().get(10)).getBytes()),
                             32);
             final Sign.SignatureData signatureData = new Sign.SignatureData(v, r, s);
             return new SignedRawTransaction(
-                    nonce, gasPrice, gasLimit, to, value, data, signatureData);
+                    nonce, gasPrice, gasLimit, to, value, data, signatureData,shardingFlag,via);
         }
     }
 }

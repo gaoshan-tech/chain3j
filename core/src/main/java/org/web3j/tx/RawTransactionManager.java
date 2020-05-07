@@ -126,6 +126,17 @@ public class RawTransactionManager extends TransactionManager {
     }
 
     @Override
+    public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value,
+                                              boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+        BigInteger nonce = getNonce();
+
+        RawTransaction rawTransaction =
+                RawTransaction.createTransaction(nonce, gasPrice, gasLimit, to, value, data,shardingFlag,via);
+
+        return signAndSend(rawTransaction);
+    }
+
+    @Override
     public EthSendTransaction sendTransactionEIP1559(
             BigInteger gasPremium,
             BigInteger feeCap,
@@ -141,6 +152,17 @@ public class RawTransactionManager extends TransactionManager {
         RawTransaction rawTransaction =
                 RawTransaction.createTransaction(
                         nonce, null, gasLimit, to, value, data, gasPremium, feeCap);
+
+        return signAndSend(rawTransaction);
+    }
+
+    @Override
+    public EthSendTransaction sendTransactionEIP1559(BigInteger gasPremium, BigInteger feeCap, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+        BigInteger nonce = getNonce();
+
+        RawTransaction rawTransaction =
+                RawTransaction.createTransaction(
+                        nonce, null, gasLimit, to, value, data, gasPremium, feeCap,shardingFlag,via);
 
         return signAndSend(rawTransaction);
     }
