@@ -117,12 +117,7 @@ public class RawTransactionManager extends TransactionManager {
             boolean constructor)
             throws IOException {
 
-        BigInteger nonce = getNonce();
-
-        RawTransaction rawTransaction =
-                RawTransaction.createTransaction(nonce, gasPrice, gasLimit, to, value, data);
-
-        return signAndSend(rawTransaction);
+        return this.sendTransaction(gasPrice, gasLimit, to, data, value, constructor, BigInteger.ZERO, null);
     }
 
     @Override
@@ -131,7 +126,7 @@ public class RawTransactionManager extends TransactionManager {
         BigInteger nonce = getNonce();
 
         RawTransaction rawTransaction =
-                RawTransaction.createTransaction(nonce, gasPrice, gasLimit, to, value, data,shardingFlag,via);
+                RawTransaction.createTransaction(nonce, gasPrice, gasLimit, to, value, data, shardingFlag, via);
 
         return signAndSend(rawTransaction);
     }
@@ -147,13 +142,7 @@ public class RawTransactionManager extends TransactionManager {
             boolean constructor)
             throws IOException {
 
-        BigInteger nonce = getNonce();
-
-        RawTransaction rawTransaction =
-                RawTransaction.createTransaction(
-                        nonce, null, gasLimit, to, value, data, gasPremium, feeCap);
-
-        return signAndSend(rawTransaction);
+        return this.sendTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data, value, constructor, BigInteger.ZERO, null) ;
     }
 
     @Override
@@ -162,7 +151,7 @@ public class RawTransactionManager extends TransactionManager {
 
         RawTransaction rawTransaction =
                 RawTransaction.createTransaction(
-                        nonce, null, gasLimit, to, value, data, gasPremium, feeCap,shardingFlag,via);
+                        nonce, null, gasLimit, to, value, data, gasPremium, feeCap, shardingFlag, via);
 
         return signAndSend(rawTransaction);
     }

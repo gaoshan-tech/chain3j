@@ -12,10 +12,13 @@
  */
 package org.web3j.tx;
 
+import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.besu.Besu;
+import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.tx.gas.BesuPrivacyGasProvider;
 import org.web3j.utils.Base64String;
 import org.web3j.utils.PrivacyGroupUtils;
@@ -58,6 +61,7 @@ public class LegacyPrivateTransactionManager extends PrivateTransactionManager {
                 15 * 1000);
     }
 
+    @Override
     public Base64String getPrivacyGroupId() {
         return privacyGroupId;
     }
@@ -65,5 +69,15 @@ public class LegacyPrivateTransactionManager extends PrivateTransactionManager {
     @Override
     protected Object privacyGroupIdOrPrivateFor() {
         return privateFor;
+    }
+
+    @Override
+    public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+        return null;
+    }
+
+    @Override
+    public EthSendTransaction sendTransactionEIP1559(BigInteger gasPremium, BigInteger feeCap, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+        return null;
     }
 }

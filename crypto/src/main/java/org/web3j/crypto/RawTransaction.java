@@ -52,29 +52,6 @@ public class RawTransaction {
             BigInteger value,
             String data,
             BigInteger gasPremium,
-            BigInteger feeCap) {
-       new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap,BigInteger.ZERO,null);
-    }
-
-    protected RawTransaction(
-            BigInteger nonce,
-            BigInteger gasPrice,
-            BigInteger gasLimit,
-            String to,
-            BigInteger value,
-            String data,
-            BigInteger shardingflag, String via) {
-        new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, null, null,shardingflag,via);
-    }
-
-    protected RawTransaction(
-            BigInteger nonce,
-            BigInteger gasPrice,
-            BigInteger gasLimit,
-            String to,
-            BigInteger value,
-            String data,
-            BigInteger gasPremium,
             BigInteger feeCap, BigInteger shardingflag, String via) {
         this.nonce = nonce;
         this.gasPrice = gasPrice;
@@ -105,7 +82,7 @@ public class RawTransaction {
             BigInteger value,
             String init, BigInteger shardingflag, String via) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init,shardingflag,via);
+        return new RawTransaction(nonce, gasPrice, gasLimit, "", value, init, null, null, shardingflag, via);
     }
 
     public static RawTransaction createEtherTransaction(
@@ -115,7 +92,7 @@ public class RawTransaction {
             String to,
             BigInteger value) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "");
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",null,null, BigInteger.ONE, null);
     }
 
     public static RawTransaction createEtherTransaction(
@@ -125,7 +102,7 @@ public class RawTransaction {
             String to,
             BigInteger value, BigInteger shardingflag, String via) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",shardingflag,via);
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",null,null,shardingflag,via);
     }
 
     public static RawTransaction createEtherTransaction(
@@ -135,7 +112,7 @@ public class RawTransaction {
             BigInteger value,
             BigInteger gasPremium,
             BigInteger feeCap) {
-        return new RawTransaction(nonce, null, gasLimit, to, value, "", gasPremium, feeCap);
+        return new RawTransaction(nonce, null, gasLimit, to, value, "", gasPremium, feeCap, BigInteger.ONE, null);
     }
 
     public static RawTransaction createEtherTransaction(
@@ -177,7 +154,7 @@ public class RawTransaction {
             BigInteger value,
             String data,BigInteger shardingflag,String via) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data,shardingflag,via);
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, null, null, shardingflag,via);
     }
 
     public static RawTransaction createTransaction(
@@ -190,7 +167,7 @@ public class RawTransaction {
             BigInteger gasPremium,
             BigInteger feeCap) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap);
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap, BigInteger.ONE, null);
     }
 
     public static RawTransaction createTransaction(

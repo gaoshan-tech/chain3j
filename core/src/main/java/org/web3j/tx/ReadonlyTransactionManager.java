@@ -42,8 +42,8 @@ public class ReadonlyTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
-        throw new UnsupportedOperationException(
-                "Only read operations are supported by this transaction manager");
+       return this.sendTransaction(gasPrice, gasLimit, to, data,
+                value, constructor, BigInteger.ZERO, null);
     }
 
     @Override
@@ -64,8 +64,8 @@ public class ReadonlyTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
-        throw new UnsupportedOperationException(
-                "Only read operations are supported by this transaction manager");
+        return this.sendTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data,
+                value, constructor, BigInteger.ZERO, null);
     }
 
     @Override

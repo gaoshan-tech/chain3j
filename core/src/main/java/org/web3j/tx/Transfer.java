@@ -52,31 +52,7 @@ public class Transfer extends ManagedTransaction {
             throws IOException, InterruptedException, TransactionException {
 
         BigInteger gasPrice = requestCurrentGasPrice();
-        return send(toAddress, value, unit, gasPrice, GAS_LIMIT);
-    }
-
-    private TransactionReceipt send(
-            String toAddress,
-            BigDecimal value,
-            Convert.Unit unit,
-            BigInteger gasPrice,
-            BigInteger gasLimit)
-            throws IOException, InterruptedException, TransactionException {
-
-        BigDecimal weiValue = Convert.toWei(value, unit);
-        if (!Numeric.isIntegerValue(weiValue)) {
-            throw new UnsupportedOperationException(
-                    "Non decimal Wei value provided: "
-                            + value
-                            + " "
-                            + unit.toString()
-                            + " = "
-                            + weiValue
-                            + " Wei");
-        }
-
-        String resolvedAddress = ensResolver.resolve(toAddress);
-        return send(resolvedAddress, "", weiValue.toBigIntegerExact(), gasPrice, gasLimit);
+        return send(toAddress, value, unit, gasPrice, GAS_LIMIT, BigInteger.ZERO, null);
     }
 
     private TransactionReceipt send(
@@ -137,7 +113,7 @@ public class Transfer extends ManagedTransaction {
             Convert.Unit unit,
             BigInteger gasPrice,
             BigInteger gasLimit) {
-        return new RemoteCall<>(() -> send(toAddress, value, unit, gasPrice, gasLimit));
+        return new RemoteCall<>(() -> send(toAddress, value, unit, gasPrice, gasLimit, BigInteger.ZERO, null));
     }
 
     public static RemoteCall<TransactionReceipt> sendFundsEIP1559(

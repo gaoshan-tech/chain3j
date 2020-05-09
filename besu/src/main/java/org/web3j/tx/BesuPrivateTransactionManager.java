@@ -14,8 +14,12 @@ package org.web3j.tx;
 
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.besu.Besu;
+import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.tx.gas.BesuPrivacyGasProvider;
 import org.web3j.utils.Base64String;
+
+import java.io.IOException;
+import java.math.BigInteger;
 
 /** PrivateTransactionManager implementation for using a Besu node to transact. */
 public class BesuPrivateTransactionManager extends PrivateTransactionManager {
@@ -61,5 +65,15 @@ public class BesuPrivateTransactionManager extends PrivateTransactionManager {
     @Override
     protected Object privacyGroupIdOrPrivateFor() {
         return privacyGroupId;
+    }
+
+    @Override
+    public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+        return null;
+    }
+
+    @Override
+    public EthSendTransaction sendTransactionEIP1559(BigInteger gasPremium, BigInteger feeCap, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+        return null;
     }
 }

@@ -99,7 +99,7 @@ public abstract class ManagedTransaction {
             String to, String data, BigInteger value, BigInteger gasPrice, BigInteger gasLimit)
             throws IOException, TransactionException {
 
-        return transactionManager.executeTransaction(gasPrice, gasLimit, to, data, value);
+        return this.send(to,  data, value, gasPrice, gasLimit, BigInteger.ZERO,  null);
     }
 
     protected TransactionReceipt send(

@@ -60,11 +60,7 @@ public class ClientTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
-
-        Transaction transaction =
-                new Transaction(getFromAddress(), null, gasPrice, gasLimit, to, value, data);
-
-        return web3j.ethSendTransaction(transaction).send();
+        return this.sendTransaction(gasPrice, gasLimit, to, data, value,constructor,BigInteger.ZERO, null);
     }
 
     @Override
@@ -78,7 +74,7 @@ public class ClientTransactionManager extends TransactionManager {
             throws IOException {
 
         Transaction transaction =
-                new Transaction(getFromAddress(), null, gasPrice, gasLimit, to, value, data,null,null,BigInteger.ZERO, null);
+                new Transaction(getFromAddress(), null, gasPrice, gasLimit, to, value, data,null,null,shardingFlag, via);
 
         return web3j.ethSendTransaction(transaction).send();
     }
@@ -93,20 +89,14 @@ public class ClientTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
-
-        Transaction transaction =
-                new Transaction(
-                        getFromAddress(),
-                        null,
-                        null,
-                        gasLimit,
-                        to,
-                        value,
-                        data,
-                        gasPremium,
-                        feeCap);
-
-        return web3j.ethSendTransaction(transaction).send();
+        return this.sendTransactionEIP1559(
+                gasPremium,
+                feeCap,
+                gasLimit,
+                to,
+                data,
+                value,
+                constructor, BigInteger.ZERO, null);
     }
 
     @Override
@@ -130,7 +120,7 @@ public class ClientTransactionManager extends TransactionManager {
                         value,
                         data,
                         gasPremium,
-                        feeCap,BigInteger.ZERO, null);
+                        feeCap,shardingFlag, via);
 
         return web3j.ethSendTransaction(transaction).send();
     }

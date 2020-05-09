@@ -56,33 +56,6 @@ public class Transaction {
         this(from, nonce, gasPrice, gasLimit, to, value, data, null, null, BigInteger.ZERO, null);
     }
 
-    public Transaction(
-            String from,
-            BigInteger nonce,
-            BigInteger gasPrice,
-            BigInteger gasLimit,
-            String to,
-            BigInteger value,
-            String data, BigInteger shardingflag, String via) {
-        new Transaction(from, nonce, gasPrice, gasLimit, to, value, data, shardingflag, via);
-    }
-
-    public Transaction(
-            String from,
-            BigInteger nonce,
-            BigInteger gasPrice,
-            BigInteger gasLimit,
-            String to,
-            BigInteger value,
-            String data,
-            BigInteger gasPremium,
-            BigInteger feeCap) {
-        new Transaction(from, nonce, gasPrice, gasLimit,
-                to, value, data,
-                gasPremium,
-                feeCap, BigInteger.ZERO, null);
-    }
-
     public Transaction(String from, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit,
                        String to, BigInteger value, String data,
                        BigInteger gasPremium,
