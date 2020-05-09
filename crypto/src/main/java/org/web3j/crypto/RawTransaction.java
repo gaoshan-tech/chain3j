@@ -52,6 +52,18 @@ public class RawTransaction {
             BigInteger value,
             String data,
             BigInteger gasPremium,
+            BigInteger feeCap) {
+        this(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap,BigInteger.ZERO,null);
+    }
+
+    protected RawTransaction(
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
+            String data,
+            BigInteger gasPremium,
             BigInteger feeCap, BigInteger shardingflag, String via) {
         this.nonce = nonce;
         this.gasPrice = gasPrice;
