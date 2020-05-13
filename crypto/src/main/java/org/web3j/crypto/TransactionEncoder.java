@@ -21,6 +21,7 @@ import org.web3j.rlp.RlpEncoder;
 import org.web3j.rlp.RlpList;
 import org.web3j.rlp.RlpString;
 import org.web3j.rlp.RlpType;
+import org.web3j.tx.ChainIdLong;
 import org.web3j.utils.Bytes;
 import org.web3j.utils.Numeric;
 
@@ -34,11 +35,8 @@ public class TransactionEncoder {
     private static final int LOWER_REAL_V = 27;
 
     public static byte[] signMessage(RawTransaction rawTransaction, Credentials credentials) {
-        byte[] encodedTransaction = encode(rawTransaction);
-        Sign.SignatureData signatureData =
-                Sign.signMessage(encodedTransaction, credentials.getEcKeyPair());
 
-        return encode(rawTransaction, signatureData);
+        return signMessage(rawTransaction, ChainIdLong.MC_MAINNET,credentials);
     }
 
     public static byte[] signMessage(

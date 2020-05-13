@@ -85,7 +85,19 @@ public class Transaction {
             BigInteger value,
             String init) {
 
-        return new Transaction(from, nonce, gasPrice, gasLimit, null, value, init);
+        return createContractTransaction(from, nonce, gasPrice, gasLimit, value, init, BigInteger.ZERO, null);
+    }
+
+    public static Transaction createContractTransaction(
+            String from,
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            BigInteger value,
+            String init,
+            BigInteger shardingflag, String via) {
+
+        return new Transaction(from, nonce, gasPrice, gasLimit, null, value, init, null, null, shardingflag, via);
     }
 
     public static Transaction createContractTransaction(
@@ -100,9 +112,21 @@ public class Transaction {
             BigInteger gasPrice,
             BigInteger gasLimit,
             String to,
+            BigInteger value,
+            BigInteger shardingflag, String via) {
+
+        return new Transaction(from, nonce, gasPrice, gasLimit, to, value, null, null, null, shardingflag, via);
+    }
+
+    public static Transaction createEtherTransaction(
+            String from,
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
             BigInteger value) {
 
-        return new Transaction(from, nonce, gasPrice, gasLimit, to, value, null);
+        return createEtherTransaction(from, nonce, gasPrice, gasLimit, to, value, BigInteger.ZERO, null);
     }
 
     public static Transaction createFunctionCallTransaction(

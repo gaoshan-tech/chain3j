@@ -104,7 +104,7 @@ public class RawTransaction {
             String to,
             BigInteger value) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",null,null, BigInteger.ONE, null);
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, "",null,null, BigInteger.ZERO, null);
     }
 
     public static RawTransaction createEtherTransaction(
@@ -124,7 +124,7 @@ public class RawTransaction {
             BigInteger value,
             BigInteger gasPremium,
             BigInteger feeCap) {
-        return new RawTransaction(nonce, null, gasLimit, to, value, "", gasPremium, feeCap, BigInteger.ONE, null);
+        return new RawTransaction(nonce, null, gasLimit, to, value, "", gasPremium, feeCap, BigInteger.ZERO, null);
     }
 
     public static RawTransaction createEtherTransaction(
@@ -179,7 +179,7 @@ public class RawTransaction {
             BigInteger gasPremium,
             BigInteger feeCap) {
 
-        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap, BigInteger.ONE, null);
+        return new RawTransaction(nonce, gasPrice, gasLimit, to, value, data, gasPremium, feeCap, BigInteger.ZERO, null);
     }
 
     public static RawTransaction createTransaction(
