@@ -45,10 +45,10 @@ public class Moac_Web3jTest {
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
         EthGasPrice gasPrice = web3j.ethGasPrice().send();
         BigInteger baseGasPrice = gasPrice.getGasPrice();
-        BigInteger value = Convert.toWei(new BigDecimal("0.00000000000001"), Convert.Unit.ETHER).toBigInteger();
+        BigInteger value = Convert.toWei(new BigDecimal("20"), Convert.Unit.ETHER).toBigInteger();
         BigInteger maxGas = new BigInteger("21000");
         RawTransaction rawTransaction = RawTransaction.createEtherTransaction(
-                nonce, baseGasPrice, maxGas, "0x72Dc294229dE1AA569D39367Be248ee5E5618487", value);
+                nonce, baseGasPrice, maxGas, "0x10aca3a9C8214F69e9f63C9Dad008Da2646bF775", value);
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, 101,credentials);
         String hexValue = Numeric.toHexString(signedMessage);
         EthSendTransaction ethSendTransaction = web3j.ethSendRawTransaction(hexValue).send();
