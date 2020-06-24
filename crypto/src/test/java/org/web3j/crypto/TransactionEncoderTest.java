@@ -98,11 +98,14 @@ public class TransactionEncoderTest {
     private static RawTransaction createEtherTransaction() {
         return RawTransaction.createEtherTransaction(
                 BigInteger.ZERO,
-                //BigInteger.ONE,
+                // BigInteger.ONE,
                 BigInteger.TEN,
                 "0xadd5355",
                 BigInteger.valueOf(Long.MAX_VALUE),
-                BigInteger.valueOf(Long.MAX_VALUE),BigInteger.valueOf(Long.MAX_VALUE),BigInteger.ONE,null);
+                BigInteger.valueOf(Long.MAX_VALUE),
+                BigInteger.valueOf(Long.MAX_VALUE),
+                BigInteger.ONE,
+                null);
     }
 
     static RawTransaction createContractTransaction() {
@@ -111,7 +114,9 @@ public class TransactionEncoderTest {
                 BigInteger.ONE,
                 BigInteger.TEN,
                 BigInteger.valueOf(Long.MAX_VALUE),
-                "01234566789",BigInteger.ONE,null);
+                "01234566789",
+                BigInteger.ONE,
+                null);
     }
 
     private static RawTransaction createEip155RawTransaction() {
@@ -120,7 +125,9 @@ public class TransactionEncoderTest {
                 BigInteger.valueOf(20000000000L),
                 BigInteger.valueOf(21000),
                 "0x3535353535353535353535353535353535353535",
-                BigInteger.valueOf(1000000000000000000L),BigInteger.ONE,null);
+                BigInteger.valueOf(1000000000000000000L),
+                BigInteger.ONE,
+                null);
     }
 
     private static RawTransaction createEip1559RawTransaction() {
@@ -130,6 +137,8 @@ public class TransactionEncoderTest {
                 "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
                 BigInteger.valueOf(123),
                 BigInteger.valueOf(5678),
-                BigInteger.valueOf(1100000),BigInteger.ONE,null);
+                BigInteger.valueOf(1100000),
+                BigInteger.ONE,
+                null);
     }
 }

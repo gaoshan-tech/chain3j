@@ -41,7 +41,7 @@ public class RawTransaction {
             String to,
             BigInteger value,
             String data) {
-        this(nonce, gasPrice, gasLimit, to, value, data, null, null,BigInteger.ZERO,null);
+        this(nonce, gasPrice, gasLimit, to, value, data, null, null, BigInteger.ZERO, null);
     }
 
     protected RawTransaction(
