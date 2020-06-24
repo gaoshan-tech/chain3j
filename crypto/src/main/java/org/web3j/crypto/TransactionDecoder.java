@@ -40,7 +40,8 @@ public class TransactionDecoder {
                         && ((RlpString) values.getValues().get(10)).getBytes().length == 10)) {
             // the 8th or 9nth element is the hex
             // representation of "restricted" for private transactions
-            return RawTransaction.createTransaction(nonce, gasPrice, gasLimit, to, value, data,shardingFlag,via);
+            return RawTransaction.createTransaction(
+                    nonce, gasPrice, gasLimit, to, value, data, shardingFlag, via);
         } else {
             final byte[] v = ((RlpString) values.getValues().get(8)).getBytes();
             final byte[] r =
@@ -53,7 +54,7 @@ public class TransactionDecoder {
                             32);
             final Sign.SignatureData signatureData = new Sign.SignatureData(v, r, s);
             return new SignedRawTransaction(
-                    nonce, gasPrice, gasLimit, to, value, data, signatureData,shardingFlag,via);
+                    nonce, gasPrice, gasLimit, to, value, data, signatureData, shardingFlag, via);
         }
     }
 }

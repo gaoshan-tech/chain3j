@@ -56,10 +56,18 @@ public class Transaction {
         this(from, nonce, gasPrice, gasLimit, to, value, data, null, null, BigInteger.ZERO, null);
     }
 
-    public Transaction(String from, BigInteger nonce, BigInteger gasPrice, BigInteger gasLimit,
-                       String to, BigInteger value, String data,
-                       BigInteger gasPremium,
-                       BigInteger feeCap, BigInteger shardingflag, String via) {
+    public Transaction(
+            String from,
+            BigInteger nonce,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            BigInteger value,
+            String data,
+            BigInteger gasPremium,
+            BigInteger feeCap,
+            BigInteger shardingflag,
+            String via) {
         this.from = from;
         this.to = to;
         this.gas = gasLimit;
@@ -85,7 +93,8 @@ public class Transaction {
             BigInteger value,
             String init) {
 
-        return createContractTransaction(from, nonce, gasPrice, gasLimit, value, init, BigInteger.ZERO, null);
+        return createContractTransaction(
+                from, nonce, gasPrice, gasLimit, value, init, BigInteger.ZERO, null);
     }
 
     public static Transaction createContractTransaction(
@@ -95,9 +104,11 @@ public class Transaction {
             BigInteger gasLimit,
             BigInteger value,
             String init,
-            BigInteger shardingflag, String via) {
+            BigInteger shardingflag,
+            String via) {
 
-        return new Transaction(from, nonce, gasPrice, gasLimit, null, value, init, null, null, shardingflag, via);
+        return new Transaction(
+                from, nonce, gasPrice, gasLimit, null, value, init, null, null, shardingflag, via);
     }
 
     public static Transaction createContractTransaction(
@@ -113,9 +124,11 @@ public class Transaction {
             BigInteger gasLimit,
             String to,
             BigInteger value,
-            BigInteger shardingflag, String via) {
+            BigInteger shardingflag,
+            String via) {
 
-        return new Transaction(from, nonce, gasPrice, gasLimit, to, value, null, null, null, shardingflag, via);
+        return new Transaction(
+                from, nonce, gasPrice, gasLimit, to, value, null, null, null, shardingflag, via);
     }
 
     public static Transaction createEtherTransaction(
@@ -126,7 +139,8 @@ public class Transaction {
             String to,
             BigInteger value) {
 
-        return createEtherTransaction(from, nonce, gasPrice, gasLimit, to, value, BigInteger.ZERO, null);
+        return createEtherTransaction(
+                from, nonce, gasPrice, gasLimit, to, value, BigInteger.ZERO, null);
     }
 
     public static Transaction createFunctionCallTransaction(

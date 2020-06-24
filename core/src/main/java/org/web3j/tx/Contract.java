@@ -109,13 +109,7 @@ public abstract class Contract extends ManagedTransaction {
             Web3j web3j,
             Credentials credentials,
             ContractGasProvider gasProvider) {
-        this(
-                contractBinary,
-                contractAddress,
-                web3j,
-                credentials,
-                gasProvider,
-                ChainId.MC_MAINNET);
+        this(contractBinary, contractAddress, web3j, credentials, gasProvider, ChainId.MC_MAINNET);
     }
 
     protected Contract(
@@ -130,7 +124,7 @@ public abstract class Contract extends ManagedTransaction {
                 contractBinary,
                 contractAddress,
                 web3j,
-                new RawTransactionManager(web3j, credentials,chainId),
+                new RawTransactionManager(web3j, credentials, chainId),
                 gasProvider);
     }
 
@@ -204,13 +198,7 @@ public abstract class Contract extends ManagedTransaction {
             Credentials credentials,
             BigInteger gasPrice,
             BigInteger gasLimit) {
-        this(
-                contractAddress,
-                web3j,
-                credentials,
-                gasPrice,
-                gasLimit,
-                ChainId.MC_MAINNET);
+        this(contractAddress, web3j, credentials, gasPrice, gasLimit, ChainId.MC_MAINNET);
     }
 
     @Deprecated

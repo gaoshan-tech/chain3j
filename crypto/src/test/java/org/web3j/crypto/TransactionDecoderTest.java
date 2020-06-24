@@ -35,7 +35,8 @@ public class TransactionDecoderTest {
         BigInteger shardingFlag = BigInteger.ZERO;
         String via = "0x";
         RawTransaction rawTransaction =
-                RawTransaction.createEtherTransaction(nonce, gasPrice, gasLimit, to, value, shardingFlag, via);
+                RawTransaction.createEtherTransaction(
+                        nonce, gasPrice, gasLimit, to, value, shardingFlag, via);
         byte[] encodedMessage = TransactionEncoder.encode(rawTransaction);
         String hexMessage = Numeric.toHexString(encodedMessage);
 
@@ -59,7 +60,8 @@ public class TransactionDecoderTest {
         BigInteger shardingFlag = BigInteger.ZERO;
         String via = "0x";
         RawTransaction rawTransaction =
-                RawTransaction.createEtherTransaction(nonce, gasPrice, gasLimit, to, value, shardingFlag, via);
+                RawTransaction.createEtherTransaction(
+                        nonce, gasPrice, gasLimit, to, value, shardingFlag, via);
         byte[] signedMessage =
                 TransactionEncoder.signMessage(rawTransaction, SampleKeys.CREDENTIALS);
         String hexMessage = Numeric.toHexString(signedMessage);
@@ -95,7 +97,8 @@ public class TransactionDecoderTest {
         String via = "0x";
         long chainId = 46;
         RawTransaction rawTransaction =
-                RawTransaction.createEtherTransaction(nonce, gasPrice, gasLimit, to, value, shardingFlag, via);
+                RawTransaction.createEtherTransaction(
+                        nonce, gasPrice, gasLimit, to, value, shardingFlag, via);
         byte[] signedMessage =
                 TransactionEncoder.signMessage(rawTransaction, chainId, SampleKeys.CREDENTIALS);
         String hexMessage = Numeric.toHexString(signedMessage);

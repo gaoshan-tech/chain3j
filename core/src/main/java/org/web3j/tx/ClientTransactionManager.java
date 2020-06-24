@@ -60,7 +60,8 @@ public class ClientTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
-        return this.sendTransaction(gasPrice, gasLimit, to, data, value,constructor,BigInteger.ZERO, null);
+        return this.sendTransaction(
+                gasPrice, gasLimit, to, data, value, constructor, BigInteger.ZERO, null);
     }
 
     @Override
@@ -70,11 +71,24 @@ public class ClientTransactionManager extends TransactionManager {
             String to,
             String data,
             BigInteger value,
-            boolean constructor, BigInteger shardingFlag, String via)
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
             throws IOException {
 
         Transaction transaction =
-                new Transaction(getFromAddress(), null, gasPrice, gasLimit, to, value, data,null,null,shardingFlag, via);
+                new Transaction(
+                        getFromAddress(),
+                        null,
+                        gasPrice,
+                        gasLimit,
+                        to,
+                        value,
+                        data,
+                        null,
+                        null,
+                        shardingFlag,
+                        via);
 
         return web3j.ethSendTransaction(transaction).send();
     }
@@ -90,13 +104,7 @@ public class ClientTransactionManager extends TransactionManager {
             boolean constructor)
             throws IOException {
         return this.sendTransactionEIP1559(
-                gasPremium,
-                feeCap,
-                gasLimit,
-                to,
-                data,
-                value,
-                constructor, BigInteger.ZERO, null);
+                gasPremium, feeCap, gasLimit, to, data, value, constructor, BigInteger.ZERO, null);
     }
 
     @Override
@@ -107,7 +115,9 @@ public class ClientTransactionManager extends TransactionManager {
             String to,
             String data,
             BigInteger value,
-            boolean constructor, BigInteger shardingFlag, String via)
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
             throws IOException {
 
         Transaction transaction =
@@ -120,7 +130,9 @@ public class ClientTransactionManager extends TransactionManager {
                         value,
                         data,
                         gasPremium,
-                        feeCap,shardingFlag, via);
+                        feeCap,
+                        shardingFlag,
+                        via);
 
         return web3j.ethSendTransaction(transaction).send();
     }

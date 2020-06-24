@@ -99,15 +99,21 @@ public abstract class ManagedTransaction {
             String to, String data, BigInteger value, BigInteger gasPrice, BigInteger gasLimit)
             throws IOException, TransactionException {
 
-        return this.send(to,  data, value, gasPrice, gasLimit, BigInteger.ZERO,  null);
+        return this.send(to, data, value, gasPrice, gasLimit, BigInteger.ZERO, null);
     }
 
     protected TransactionReceipt send(
-            String to, String data, BigInteger value, BigInteger gasPrice, BigInteger gasLimit,
-            BigInteger shardingFlag, String via)
+            String to,
+            String data,
+            BigInteger value,
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            BigInteger shardingFlag,
+            String via)
             throws IOException, TransactionException {
 
-        return transactionManager.executeTransaction(gasPrice, gasLimit, to, data, value,shardingFlag, via);
+        return transactionManager.executeTransaction(
+                gasPrice, gasLimit, to, data, value, shardingFlag, via);
     }
 
     protected TransactionReceipt sendEIP1559(

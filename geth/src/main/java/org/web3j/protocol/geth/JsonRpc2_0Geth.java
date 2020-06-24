@@ -101,10 +101,7 @@ public class JsonRpc2_0Geth extends JsonRpc2_0Admin implements Geth {
     public Flowable<SyncingNotfication> syncingStatusNotifications() {
         return web3jService.subscribe(
                 new Request<>(
-                        "mc_subscribe",
-                        Arrays.asList("syncing"),
-                        web3jService,
-                        EthSubscribe.class),
+                        "mc_subscribe", Arrays.asList("syncing"), web3jService, EthSubscribe.class),
                 "mc_unsubscribe",
                 SyncingNotfication.class);
     }
