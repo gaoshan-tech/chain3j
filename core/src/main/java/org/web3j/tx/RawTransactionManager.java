@@ -82,12 +82,12 @@ public class RawTransactionManager extends TransactionManager {
     }
 
     public RawTransactionManager(Web3j web3j, Credentials credentials) {
-        this(web3j, credentials, ChainId.NONE);
+        this(web3j, credentials, ChainId.MC_MAINNET);
     }
 
     public RawTransactionManager(
             Web3j web3j, Credentials credentials, int attempts, int sleepDuration) {
-        this(web3j, credentials, ChainId.NONE, attempts, sleepDuration);
+        this(web3j, credentials, ChainId.MC_MAINNET, attempts, sleepDuration);
     }
 
     protected BigInteger getNonce() throws IOException {
