@@ -23,7 +23,6 @@ import org.web3j.protocol.RequestTester;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.EthFilter;
-import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.utils.Base64String;
 
@@ -213,24 +212,6 @@ public class RequestTest extends RequestTester {
         verifyResult(
                 "{\"jsonrpc\":\"2.0\",\"method\":\"priv_getCode\","
                         + "\"params\":[\"DyAOiF/ynpc+JXa2YAGB0bCitSlOMNm+ShmB/7M6C4w=\",\"A1aVtMxLCUHmBVHXoZzzBgPbW/wj5axDpW9X8l91SGo=\",\"latest\"],\"id\":1}");
-    }
-
-    @Test
-    public void testPrivCall() throws Exception {
-        web3j.privCall(
-                        MOCK_PRIVACY_GROUP_ID.toString(),
-                        Transaction.createEthCallTransaction(
-                                "0xa70e8dd61c5d32be8058bb8eb970870f07233155",
-                                "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-                                "0x0"),
-                        DefaultBlockParameter.valueOf("latest"))
-                .send();
-
-        verifyResult(
-                "{\"jsonrpc\":\"2.0\",\"method\":\"priv_call\","
-                        + "\"params\":[\"DyAOiF/ynpc+JXa2YAGB0bCitSlOMNm+ShmB/7M6C4w=\",{\"from\":\"0xa70e8dd61c5d32be8058bb8eb970870f07233155\","
-                        + "\"to\":\"0xb60e8dd61c5d32be8058bb8eb970870f07233155\",\"data\":\"0x0\"},"
-                        + "\"latest\"],\"id\":1}");
     }
 
     @Test
