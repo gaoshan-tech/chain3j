@@ -42,13 +42,20 @@ public class ReadonlyTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
-       return this.sendTransaction(gasPrice, gasLimit, to, data,
-                value, constructor, BigInteger.ZERO, null);
+        return this.sendTransaction(
+                gasPrice, gasLimit, to, data, value, constructor, BigInteger.ZERO, null);
     }
 
     @Override
-    public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data,
-                                              BigInteger value, boolean constructor, BigInteger shardingFlag, String via)
+    public EthSendTransaction sendTransaction(
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
             throws IOException {
         throw new UnsupportedOperationException(
                 "Only read operations are supported by this transaction manager");
@@ -64,12 +71,22 @@ public class ReadonlyTransactionManager extends TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException {
-        return this.sendTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data,
-                value, constructor, BigInteger.ZERO, null);
+        return this.sendTransactionEIP1559(
+                gasPremium, feeCap, gasLimit, to, data, value, constructor, BigInteger.ZERO, null);
     }
 
     @Override
-    public EthSendTransaction sendTransactionEIP1559(BigInteger gasPremium, BigInteger feeCap, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+    public EthSendTransaction sendTransactionEIP1559(
+            BigInteger gasPremium,
+            BigInteger feeCap,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
+            throws IOException {
         throw new UnsupportedOperationException(
                 "Only read operations are supported by this transaction manager");
     }

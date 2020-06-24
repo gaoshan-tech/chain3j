@@ -36,7 +36,7 @@ public class TransactionEncoder {
 
     public static byte[] signMessage(RawTransaction rawTransaction, Credentials credentials) {
 
-        return signMessage(rawTransaction, ChainIdLong.MC_MAINNET,credentials);
+        return signMessage(rawTransaction, ChainIdLong.MC_MAINNET, credentials);
     }
 
     public static byte[] signMessage(
@@ -123,7 +123,7 @@ public class TransactionEncoder {
         // value field will already be hex encoded, so we need to convert into binary first
         byte[] data = Numeric.hexStringToByteArray(rawTransaction.getData());
         result.add(RlpString.create(data));
-        //transaction.shardingFlag = utils.numberToHex(tx.shardingFlag);
+        // transaction.shardingFlag = utils.numberToHex(tx.shardingFlag);
         result.add(RlpString.create(rawTransaction.getShardingflag()));
         // transaction.via.toLowerCase(),
         String via = rawTransaction.getVia();

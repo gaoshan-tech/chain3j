@@ -64,10 +64,18 @@ public abstract class TransactionManager {
             BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value)
             throws IOException, TransactionException {
 
-        return executeTransaction(gasPrice, gasLimit, to, data, value, false, BigInteger.ZERO, null);
+        return executeTransaction(
+                gasPrice, gasLimit, to, data, value, false, BigInteger.ZERO, null);
     }
+
     protected TransactionReceipt executeTransaction(
-            BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value, BigInteger shardingflag, String via)
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            BigInteger shardingflag,
+            String via)
             throws IOException, TransactionException {
 
         return executeTransaction(gasPrice, gasLimit, to, data, value, false, shardingflag, via);
@@ -81,7 +89,8 @@ public abstract class TransactionManager {
             BigInteger value,
             boolean constructor)
             throws IOException, TransactionException {
-        return executeTransaction(gasPrice, gasLimit, to, data, value,constructor, BigInteger.ZERO, null);
+        return executeTransaction(
+                gasPrice, gasLimit, to, data, value, constructor, BigInteger.ZERO, null);
     }
 
     protected TransactionReceipt executeTransaction(
@@ -90,11 +99,14 @@ public abstract class TransactionManager {
             String to,
             String data,
             BigInteger value,
-            boolean constructor, BigInteger shardingflag, String via)
+            boolean constructor,
+            BigInteger shardingflag,
+            String via)
             throws IOException, TransactionException {
 
         EthSendTransaction ethSendTransaction =
-                sendTransaction(gasPrice, gasLimit, to, data, value, constructor, shardingflag, via);
+                sendTransaction(
+                        gasPrice, gasLimit, to, data, value, constructor, shardingflag, via);
         return processResponse(ethSendTransaction);
     }
 
@@ -107,18 +119,8 @@ public abstract class TransactionManager {
             BigInteger value)
             throws IOException, TransactionException {
 
-        return executeTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data, value, false, BigInteger.ZERO, null);
-    }
-    protected TransactionReceipt executeTransactionEIP1559(
-            BigInteger gasPremium,
-            BigInteger feeCap,
-            BigInteger gasLimit,
-            String to,
-            String data,
-            BigInteger value, BigInteger shardingflag, String via)
-            throws IOException, TransactionException {
-
-        return executeTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data, value, false, shardingflag, via);
+        return executeTransactionEIP1559(
+                gasPremium, feeCap, gasLimit, to, data, value, false, BigInteger.ZERO, null);
     }
 
     protected TransactionReceipt executeTransactionEIP1559(
@@ -128,13 +130,40 @@ public abstract class TransactionManager {
             String to,
             String data,
             BigInteger value,
-            boolean constructor, BigInteger shardingflag, String via)
+            BigInteger shardingflag,
+            String via)
+            throws IOException, TransactionException {
+
+        return executeTransactionEIP1559(
+                gasPremium, feeCap, gasLimit, to, data, value, false, shardingflag, via);
+    }
+
+    protected TransactionReceipt executeTransactionEIP1559(
+            BigInteger gasPremium,
+            BigInteger feeCap,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            boolean constructor,
+            BigInteger shardingflag,
+            String via)
             throws IOException, TransactionException {
 
         EthSendTransaction ethSendTransaction =
-                sendTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data, value, constructor, shardingflag, via);
+                sendTransactionEIP1559(
+                        gasPremium,
+                        feeCap,
+                        gasLimit,
+                        to,
+                        data,
+                        value,
+                        constructor,
+                        shardingflag,
+                        via);
         return processResponse(ethSendTransaction);
     }
+
     protected TransactionReceipt executeTransactionEIP1559(
             BigInteger gasPremium,
             BigInteger feeCap,
@@ -146,7 +175,16 @@ public abstract class TransactionManager {
             throws IOException, TransactionException {
 
         EthSendTransaction ethSendTransaction =
-                sendTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data, value, constructor, BigInteger.ZERO, null);
+                sendTransactionEIP1559(
+                        gasPremium,
+                        feeCap,
+                        gasLimit,
+                        to,
+                        data,
+                        value,
+                        constructor,
+                        BigInteger.ZERO,
+                        null);
         return processResponse(ethSendTransaction);
     }
 
@@ -157,7 +195,13 @@ public abstract class TransactionManager {
     }
 
     public EthSendTransaction sendTransaction(
-            BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value, BigInteger shardingflag, String via)
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            BigInteger shardingflag,
+            String via)
             throws IOException {
         return sendTransaction(gasPrice, gasLimit, to, data, value, false, shardingflag, via);
     }
@@ -170,7 +214,8 @@ public abstract class TransactionManager {
             String data,
             BigInteger value)
             throws IOException {
-        return sendTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data, value, false, BigInteger.ZERO, null);
+        return sendTransactionEIP1559(
+                gasPremium, feeCap, gasLimit, to, data, value, false, BigInteger.ZERO, null);
     }
 
     public EthSendTransaction sendTransactionEIP1559(
@@ -179,9 +224,12 @@ public abstract class TransactionManager {
             BigInteger gasLimit,
             String to,
             String data,
-            BigInteger value, BigInteger shardingflag, String via)
+            BigInteger value,
+            BigInteger shardingflag,
+            String via)
             throws IOException {
-        return sendTransactionEIP1559(gasPremium, feeCap, gasLimit, to, data, value, false, shardingflag, via);
+        return sendTransactionEIP1559(
+                gasPremium, feeCap, gasLimit, to, data, value, false, shardingflag, via);
     }
 
     public abstract EthSendTransaction sendTransaction(
@@ -199,7 +247,9 @@ public abstract class TransactionManager {
             String to,
             String data,
             BigInteger value,
-            boolean constructor, BigInteger shardingFlag, String via)
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
             throws IOException;
 
     public abstract EthSendTransaction sendTransactionEIP1559(
@@ -219,7 +269,9 @@ public abstract class TransactionManager {
             String to,
             String data,
             BigInteger value,
-            boolean constructor, BigInteger shardingFlag, String via)
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
             throws IOException;
 
     public abstract String sendCall(

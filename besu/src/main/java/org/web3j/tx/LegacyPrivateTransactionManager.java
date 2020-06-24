@@ -72,12 +72,31 @@ public class LegacyPrivateTransactionManager extends PrivateTransactionManager {
     }
 
     @Override
-    public EthSendTransaction sendTransaction(BigInteger gasPrice, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+    public EthSendTransaction sendTransaction(
+            BigInteger gasPrice,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
+            throws IOException {
         return null;
     }
 
     @Override
-    public EthSendTransaction sendTransactionEIP1559(BigInteger gasPremium, BigInteger feeCap, BigInteger gasLimit, String to, String data, BigInteger value, boolean constructor, BigInteger shardingFlag, String via) throws IOException {
+    public EthSendTransaction sendTransactionEIP1559(
+            BigInteger gasPremium,
+            BigInteger feeCap,
+            BigInteger gasLimit,
+            String to,
+            String data,
+            BigInteger value,
+            boolean constructor,
+            BigInteger shardingFlag,
+            String via)
+            throws IOException {
         return null;
     }
 }

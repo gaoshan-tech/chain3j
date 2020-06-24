@@ -60,7 +60,9 @@ public class Transfer extends ManagedTransaction {
             BigDecimal value,
             Convert.Unit unit,
             BigInteger gasPrice,
-            BigInteger gasLimit, BigInteger shardingflag, String via)
+            BigInteger gasLimit,
+            BigInteger shardingflag,
+            String via)
             throws IOException, InterruptedException, TransactionException {
 
         BigDecimal weiValue = Convert.toWei(value, unit);
@@ -76,7 +78,14 @@ public class Transfer extends ManagedTransaction {
         }
 
         String resolvedAddress = ensResolver.resolve(toAddress);
-        return send(resolvedAddress, "", weiValue.toBigIntegerExact(), gasPrice, gasLimit,shardingflag,via);
+        return send(
+                resolvedAddress,
+                "",
+                weiValue.toBigIntegerExact(),
+                gasPrice,
+                gasLimit,
+                shardingflag,
+                via);
     }
 
     public static RemoteCall<TransactionReceipt> sendFunds(
@@ -113,7 +122,8 @@ public class Transfer extends ManagedTransaction {
             Convert.Unit unit,
             BigInteger gasPrice,
             BigInteger gasLimit) {
-        return new RemoteCall<>(() -> send(toAddress, value, unit, gasPrice, gasLimit, BigInteger.ZERO, null));
+        return new RemoteCall<>(
+                () -> send(toAddress, value, unit, gasPrice, gasLimit, BigInteger.ZERO, null));
     }
 
     public static RemoteCall<TransactionReceipt> sendFundsEIP1559(

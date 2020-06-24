@@ -56,6 +56,8 @@ public class SignTransactionIT extends Scenario {
                 BigInteger.valueOf(500000),
                 BigInteger.valueOf(500000),
                 "0x9C98E381Edc5Fe1Ac514935F3Cc3eDAA764cf004",
-                value, BigInteger.ZERO, null);
+                value,
+                BigInteger.ZERO,
+                null);
     }
 }
