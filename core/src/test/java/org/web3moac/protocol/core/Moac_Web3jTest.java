@@ -24,6 +24,7 @@ import org.web3moac.crypto.Credentials;
 import org.web3moac.crypto.RawTransaction;
 import org.web3moac.crypto.TransactionEncoder;
 import org.web3moac.protocol.Web3moac;
+import org.web3moac.protocol.core.methods.response.EthBlockNumber;
 import org.web3moac.protocol.core.methods.response.EthGasPrice;
 import org.web3moac.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3moac.protocol.core.methods.response.EthSendTransaction;
@@ -51,6 +52,8 @@ public class Moac_Web3jTest {
 
     @Test
     public void testSendRawTransaction() throws IOException {
+        EthBlockNumber ethBlockNumber = web3j.ethBlockNumber().send();
+        System.out.println(ethBlockNumber.getBlockNumber());
         System.out.println(
                 credentials.getAddress()
                         + "余额："
