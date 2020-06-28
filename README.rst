@@ -95,7 +95,7 @@ Commercial support and training is available from `web3labs.com <https://www.web
 Quickstart
 ----------
 
-Install the Web3j binary.
+Install the Web3moac binary.
 
 To get the latest version on Mac OS or Linux, type the following in your terminal:
 
@@ -209,7 +209,7 @@ Or use which provides **free clients** running in the cloud:
 
 .. code-block:: java
 
-   Web3j web3 = Web3j.build(new HttpService("https://ropsten.infura.io/your-token"));
+   Web3moac web3 = Web3moac.build(new HttpService("https://ropsten.infura.io/your-token"));
 
 For further information refer to
 `Using Infura with web3j <https://docs.web3j.io/using_infura_with_web3j/>`_
@@ -225,7 +225,7 @@ To send synchronous requests:
 
 .. code-block:: java
 
-   Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3moac web3 = Web3moac.build(new HttpService());  // defaults to http://localhost:8545/
    Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().send();
    String clientVersion = web3ClientVersion.getWeb3ClientVersion();
 
@@ -234,7 +234,7 @@ To send asynchronous requests using a CompletableFuture (Future on Android):
 
 .. code-block:: java
 
-   Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3moac web3 = Web3moac.build(new HttpService());  // defaults to http://localhost:8545/
    Web3ClientVersion web3ClientVersion = web3.web3ClientVersion().sendAsync().get();
    String clientVersion = web3ClientVersion.getWeb3ClientVersion();
 
@@ -242,7 +242,7 @@ To use an RxJava Flowable:
 
 .. code-block:: java
 
-   Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3moac web3 = Web3moac.build(new HttpService());  // defaults to http://localhost:8545/
    web3.web3ClientVersion().flowable().subscribe(x -> {
        String clientVersion = x.getWeb3ClientVersion();
        ...
@@ -259,11 +259,11 @@ the same host as web3j. To connect simply use the relevant *IpcService* implemen
 .. code-block:: java
 
    // OS X/Linux/Unix:
-   Web3j web3 = Web3j.build(new UnixIpcService("/path/to/socketfile"));
+   Web3moac web3 = Web3moac.build(new UnixIpcService("/path/to/socketfile"));
    ...
 
    // Windows
-   Web3j web3 = Web3j.build(new WindowsIpcService("/path/to/namedpipefile"));
+   Web3moac web3 = Web3moac.build(new WindowsIpcService("/path/to/namedpipefile"));
    ...
 
 **Note:** IPC is not currently available on web3j-android.
@@ -291,7 +291,7 @@ Now you can create and deploy your smart contract:
 
 .. code-block:: java
 
-   Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3moac web3 = Web3moac.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
 
    YourSmartContract contract = YourSmartContract.deploy(
@@ -426,7 +426,7 @@ To send Ether to another party using your Ethereum wallet file:
 
 .. code-block:: java
 
-   Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3moac web3 = Web3moac.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
    TransactionReceipt transactionReceipt = Transfer.sendFunds(
            web3, credentials, "0x<address>|<ensName>",
@@ -437,7 +437,7 @@ Or if you wish to create your own custom transaction:
 
 .. code-block:: java
 
-   Web3j web3 = Web3j.build(new HttpService());  // defaults to http://localhost:8545/
+   Web3moac web3 = Web3moac.build(new HttpService());  // defaults to http://localhost:8545/
    Credentials credentials = WalletUtils.loadCredentials("password", "/path/to/walletfile");
 
    // get the next available nonce

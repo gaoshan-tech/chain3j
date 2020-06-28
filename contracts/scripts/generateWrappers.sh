@@ -11,11 +11,11 @@ targetFileIn=(
 "src/main/resources/eip721/solidity/ERC721Metadata")
 
 targetPackageOut=(
-"org.web3j.contracts.eip20.generated"
-"org.web3j.contracts.eip165.generated"
-"org.web3j.contracts.eip721.generated"
-"org.web3j.contracts.eip721.generated"
-"org.web3j.contracts.eip721.generated")
+"org.web3moac.contracts.eip20.generated"
+"org.web3moac.contracts.eip165.generated"
+"org.web3moac.contracts.eip721.generated"
+"org.web3moac.contracts.eip721.generated"
+"org.web3moac.contracts.eip721.generated")
 
 mkdir -p ../build/
 
